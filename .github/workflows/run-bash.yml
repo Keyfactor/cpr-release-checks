@@ -14,5 +14,6 @@ jobs:
 
       - name: Run bash program
         run: |
-          (for f in `find . -iname "*.java" -o -iname "*.cs" -o -iname "*.go"`; do grep -li todo $f; done) 
+          echo $PWD
+          ls -F
 
