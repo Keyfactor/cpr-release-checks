@@ -1,0 +1,17 @@
+name: Run bash program
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-bash:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Run bash program
+        run: |
+          echo "Hello, world!"
