@@ -14,10 +14,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run grep command
+      - name: Check for TODO statements
         run: |
           for f in $(find . -iname "*.java" -o -iname "*.cs" -o -iname "*.go"); do
             if grep -qi "todo" "$f"; then
               echo "TODO found in $f"
+            fi
+          done
+
+      - name: Check for Apache Licnse headers
+        run: |
+          for f in $(find . -iname "*.java" -o -iname "*.cs" -o -iname "*.go"); do
+            if grep -L "Apache\ License" "$f"; then
+              echo "Apache License headers missing from $f"
             fi
           done
