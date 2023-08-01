@@ -17,5 +17,7 @@ jobs:
       - name: Run grep command
         run: |
           for f in $(find . -iname "*.java" -o -iname "*.cs" -o -iname "*.go"); do
-            grep -li "todo" $f
+            if grep -qi "todo" "$f"; then
+              echo "TODO found in $f"
+            fi
           done
