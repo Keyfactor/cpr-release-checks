@@ -25,7 +25,5 @@ jobs:
       - name: Check for Apache Licnse headers
         run: |
           for f in $(find . -iname "*.java" -o -iname "*.cs" -o -iname "*.go"); do
-            if grep -L "Apache License" "$f"; then
-              echo "Apache License headers missing from $f"
-            fi
+            grep -L "Apache License" "$f";
           done
