@@ -1,19 +1,21 @@
-name: Run bash program
+name: Grep TODO
 
 on:
   push:
     branches:
-      - main
+      - main  # Change this to the branch you want to trigger the workflow on
 
 jobs:
-  run-bash:
+  grep_todo_job:
+    name: Grep TODO Job
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run bash program
+      - name: Run grep command
         run: |
-          echo $PWD
-          ls -F
-
+          for f in $(find . -iname "*.java" -o -iname "*.cs" -o -iname "*.go"); do
+            grep -li "todo" $f
+          done
