@@ -19,4 +19,5 @@ jobs:
 
 
       - name: Check for Apache Licnse headers
-        run: find . -iname "*.cs" -exec grep -qi "Apache License" {} \; -prune -o -print
+        run: find . -type d -name "./git*" -prune -o -type f -iname "*.cs" -exec grep -qi "Apache License" {} \; -print
+
