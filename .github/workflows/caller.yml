@@ -1,0 +1,21 @@
+name: Grep TODO
+
+on: workflow_call
+
+jobs:
+  grep_todo_job:
+    name: Grep TODO and License Headers
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Check for TODO statements
+        run: find . -iname "*.cs" -exec grep -qi "todo" {} \; -print
+
+
+      - name: Check for Apache Licnse headers
+        run: find . \( -path "./git*" -o -name "README.md" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;
+
+
