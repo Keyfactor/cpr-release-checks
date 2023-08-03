@@ -15,7 +15,7 @@ jobs:
         run: find . -iname "*.cs" -exec grep -qi "todo" {} \; -print
 
 
-      - name: Check for Apache Licnse headers
+      - name: Check for Apache License headers
         run: find . \( -path "./git*" -o -name "README.md" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;
 
 
