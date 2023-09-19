@@ -35,7 +35,7 @@ jobs:
           path: ./**/license_log.txt  # Replace with the actual path to your generated JSON file
 
       - name: Fail if no headers
-        run: if [ -s "./license_log.txt"]; then echo "Some files are missing the license header"; exit 1; fi
+        run: if [ -s "./license_log.txt" ]; then echo "Some files are missing the license header"; exit 1; fi
 
 
 
