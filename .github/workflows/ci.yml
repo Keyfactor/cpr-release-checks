@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check for TODO statements
-        run: (find . -iname "*.cs" -exec grep -qi "todo" {} \; -print) > ./todo_log.txt
+        run: (find . -iname "*.cs" -exec grep -qi "todo" {} \; -print) | tee ./todo_log.txt
 
       - name: Save todo log
         if: success()
@@ -25,7 +25,7 @@ jobs:
           path: ./**/todo_log.txt  # Replace with the actual path to your generated JSON file
 
       - name: Check for Apache Licnse headers
-        run: (find . \( -path "./git*" -o -name "README.md" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;) > ./license_log.txt
+        run: (find . \( -path "./git*" -o -name "README.md" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;) | tee ./license_log.txt
 
       - name: Save license log
         if: success()
