@@ -21,14 +21,14 @@ jobs:
       - name: Check for Apache Licnse headers
         run: (find . \( -path "./git*" -o -name "README.md" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;) > ./license_log.txt
 
-      - name: Save logs directory
+      - name: Save todo log
         if: success()
         uses: actions/upload-artifact@v3
         with:
           name: todologs  # Specify the name for your artifact
           path: ./**/todo_log.txt  # Replace with the actual path to your generated JSON file
 
-      - name: Save logs directory
+      - name: Save license log
         if: success()
         uses: actions/upload-artifact@v3
         with:
