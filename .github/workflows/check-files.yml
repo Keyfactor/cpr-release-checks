@@ -12,10 +12,27 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Check for TODO statements
-        run: find . -iname "*.cs" -exec grep -qi "todo" {} \; -print
+        run: (find . -iname "*.cs" -exec grep -qi "todo" {} \; -print) | tee ./todo_log.txt
 
+      - name: Save todo log
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: todologs  
+          path: ./**/todo_log.txt 
 
-      - name: Check for Apache License headers
-        run: find . \( -path "./git*" -o -name "README.md" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;
+      - name: Check for Apache Licnse headers
+        run: (find . \( -path "./git*" -o -name "README.md" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;) | tee ./license_log.txt
+
+      - name: Save license log
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: licenselogs  
+          path: ./**/license_log.txt  
+
+      - name: Fail if no headers
+        run: if [ -s "./license_log.txt" ]; then echo "Some files are missing the license header"; exit 1; fi
+
 
 
