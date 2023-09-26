@@ -22,7 +22,7 @@ jobs:
           path: ./**/todo_log.txt 
 
       - name: Check for Apache Licnse headers
-        run: (find . \( -path "./git*" -o -name "README.md" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;) | tee ./license_log.txt
+        run: (find . \( -path "./git*" -o -name "README.md" -o -name "AssemblyInfo.cs" \) -prune -o -type f -iname "*.cs" -exec grep -L "Apache License" {} \;) | tee ./license_log.txt
 
       - name: Save license log
         if: success()
